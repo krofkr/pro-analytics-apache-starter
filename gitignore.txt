@@ -1,0 +1,35 @@
+# This .gitignore file lists content that does NOT need to be tracked in the project history
+
+# Python virtual environment folder
+.venv/
+
+# Visual Studio Code settings and workspace folder - Ignore entire .vscode folder except settings.json
+.vscode/*
+!.vscode/settings.json
+
+# Compiled Python files
+__pycache__/
+
+# macOS system files
+.DS_Store
+
+# Jupyter Notebook checkpoint files
+.ipynb_checkpoints
+
+# Ignore installed JDK, Spark, Kafka, and Flink binaries
+jdk/*
+!jdk/README.md
+
+spark/*
+!spark/README.md
+
+kafka/*
+!kafka/README.md
+
+flink/*
+!flink/README.md
+
+# Logs and temp files
+*.log
+*.out
+*.tmp
