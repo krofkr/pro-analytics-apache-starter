@@ -9,14 +9,15 @@ Works across macOS, Linux, and Windows (via WSL).
 
 ### Just Windows Users: Set up WSL 
 
-1. Install Windows Subsystem for Linux (WSL).
-2. Open WSL by opening a PowerShell terminal and running wsl. 
+Install Windows Subsystem for Linux (WSL) by following the [instructions](01-setup/windows-users-install-wsl.md).
+
+Open WSL by opening a PowerShell terminal and running wsl. 
 
 ```powershell
 wsl
 ```
 
-Important: All remaining commands should be run from within the WSL environment.
+Important: All remaining commands should be run from within the WSL environment. We will use the same ones the Mac/Linux users do when we are working in WSL. 
 
 
 
@@ -25,18 +26,21 @@ Important: All remaining commands should be run from within the WSL environment.
 1. Copy the template repo into your GitHub account. You can change the name as desired.
 2. Open a terminal in your "Projects" folder or where ever you keep your coding projects.
 3. Avoid using "Documents" or any folder that syncs automatically to OneDrive or other cloud services.
-4. Clone this repository into that folder. 
+4. Clone this repository into that folder - Windows users - clone into your default WSL directory. 
 
-In the command below, change the name to the name you called your version of this repository. 
+In the command below, if you changed the repository name, use that name instead.  
 
-For example: 
+For example - clone with something like this - but use your GitHub account name and repo name:
 
 ```shell
-git clone [https](https://github.com/denisecase/pro-analytics-apache-starter)
-
-cd pro-analytics-apache-starter
+git clone https://github.com/denisecase/pro-analytics-apache-starter
 ```
 
+Then cd into your new folder (if you changed the name, use that):
+
+``shell
+cd pro-analytics-apache-starter
+```
 
 
 ### All Platforms: Adjust Requirements (Packages Needed)  

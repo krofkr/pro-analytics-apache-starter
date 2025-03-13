@@ -38,14 +38,18 @@
 # ======================================================
 
 ### IMPORTANT: 
-### If the project requires a large tool like Apache Kafka or Spark,
+### If the project requires a large tool like Apache Kafka,
 ### we may need to install an earlier version of Python
 ### and specify the required version when we create the virtual environment. 
 ### On Windows, Use PowerShell (not cmd) - don't include the #:
 # py -3.11 -m venv .venv
-### On Mac/Linux, Use zsh or bash (or PowerShell) - don't include the #:
-# pyenv local 3.11.11
+### On Mac  - don't include the #:
+# brew install python@3.11
 # python3 -m venv .venv
+### On Linux - don't include the #:
+# sudo apt update
+# sudo apt install python3.11 python3.11-venv
+# python3.11 -m venv .venv
 
 # ======================================================
 # STEP B - ALWAYS ACTIVATE THE (.venv) WHEN OPENING A NEW TERMINAL
