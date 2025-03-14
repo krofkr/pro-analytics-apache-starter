@@ -35,6 +35,7 @@ Make it easy to remember.
 
 This and all other commands are to be run in your WSL terminal. 
 They are the same as the Mac/Linux versions - not our PowerShell commands.
+If you get an error that sudo is not enabled and you want to continue, see the section below. 
 
 
 ```shell
@@ -45,5 +46,34 @@ sudo apt upgrade -y
 Verify it is installed and running correctly.
 
 ```shell
+wsl --list --verbose
+```
+
+## IF NEEDED: Enable Sudo "Super user" on Windows Machine WSL
+
+Open Windows Settings:
+- Open the Start Menu and select Settings (⚙️).
+- Go to Developer Settings:
+- Navigate to Privacy & Security → For developers.
+- Enable Developer Mode:
+  - Turn on Developer Mode (this allows elevated permissions in WSL).
+
+Shutdown WSL: In your WSL terminal, run:
+
+```shell
+wsl --shutdown
+```
+
+Restart WSL: Open PowerShell as Admin and run:
+
+```powershell
+wsl
+```
+
+In the WSL window, run
+
+```shell
+sudo apt update
+sudo apt upgrade -y
 wsl --list --verbose
 ```
