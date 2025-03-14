@@ -41,7 +41,8 @@ wsl
 
 ## Update and Upgrade
 
-This and all other commands are to be run in your WSL terminal. 
+**These and all other commands are to be run in your WSL terminal.** 
+
 They are the same as the Mac/Linux versions - not our PowerShell commands.
 If you get an error that sudo is not enabled and you want to continue, see the section below. 
 
