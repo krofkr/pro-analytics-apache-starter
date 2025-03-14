@@ -4,9 +4,7 @@ The open-source Apache tools like Spark come out of the open-source Linux world.
 
 We can get a little bit of Linux running on Windows machines and it makes installing and using these tools much easier. 
 
-We'll use "Windows Subsystem for Linux (WSL)"
-
-Follow the guide to install and set up WSL. 
+We'll use "Windows Subsystem for Linux (WSL)". Follow the guide to install and set up WSL. 
 
 When working in WSL, our commands will be the same as those for Mac/Linux users. 
 
@@ -39,6 +37,8 @@ Open PowerShell terminal and run:
 wsl
 ```
 
+Note: You know you're in a WSL terminal because the prompt changes from > to $. 
+
 ## Update and Upgrade
 
 **These and all other commands are to be run in your WSL terminal.** 
@@ -52,10 +52,14 @@ sudo apt update
 sudo apt upgrade -y
 ```
 
-Verify it is installed and running correctly.
+Change to your user directory. 
+Run ls to list all the files and folders in your user directory. 
+There may not be much yet. 
+Now Windows users will follow the same Apache tool installation process as Mac/Linux users. 
 
 ```shell
-wsl --list --verbose
+cd ~/
+ls
 ```
 
 ## IF NEEDED: Enable Sudo "Super user" on Windows Machine WSL
