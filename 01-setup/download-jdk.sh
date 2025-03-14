@@ -26,15 +26,12 @@
 # - https://kafka.apache.org/40/documentation/compatibility.html
 
 # TODO: Change the JDK_VERSION to the desired version if needed
-#!/bin/bash
-#!/bin/bash
-
 JDK_VERSION="17.0.10"
 JDK_FOLDER="jdk"
 
 set -e
 
-echo "➡️  Step 1: Detecting OS and architecture..."
+echo "Step 1: Detecting OS and architecture..."
 OS=$(uname -s)
 ARCH=$(uname -m)
 
@@ -43,7 +40,7 @@ if [ "$OS" = "Darwin" ]; then
 elif [ "$OS" = "Linux" ]; then
     PLATFORM="linux"
 else
-    echo "❌ Unsupported platform: $OS"
+    echo "ERROR: Unsupported platform: $OS"
     exit 1
 fi
 
@@ -57,7 +54,7 @@ echo "✅ Detected platform: $PLATFORM-$ARCH_SUFFIX"
 
 # Install curl if missing
 if ! command -v curl &> /dev/null; then
-    echo "➡️  Step 2: Installing curl..."
+    echo "Step 2: Installing curl..."
     if [ "$PLATFORM" = "linux" ]; then
         sudo apt-get update && sudo apt-get install -y curl
     elif [ "$PLATFORM" = "osx" ]; then
@@ -71,49 +68,49 @@ fi
 DOWNLOAD_URL="https://github.com/adoptium/temurin17-binaries/releases/download/jdk-${JDK_VERSION}%2B7/OpenJDK17U-jdk_${ARCH_SUFFIX}_linux_hotspot_${JDK_VERSION}_7.tar.gz"
 FILE_NAME="jdk-${JDK_VERSION}.tar.gz"
 
-echo "➡️  Step 3: Creating JDK folder..."
+echo "Step 3: Creating JDK folder..."
 mkdir -p "$JDK_FOLDER"
 echo "✅ JDK folder created at: $(pwd)/$JDK_FOLDER"
 
 if [ ! -d "$JDK_FOLDER/bin" ]; then
-    echo "➡️  Step 4: Downloading OpenJDK from:"
+    echo "Step 4: Downloading OpenJDK from:"
     echo "$DOWNLOAD_URL"
     curl -L -o "$FILE_NAME" "$DOWNLOAD_URL"
 
     echo "✅ Downloaded file:"
     ls -lh "$FILE_NAME"
 
-    echo "➡️  Step 5: Verifying file type..."
+    echo "Step 5: Verifying file type..."
     file "$FILE_NAME"
 
-    echo "➡️  Step 6: Extracting JDK..."
+    echo "Step 6: Extracting JDK..."
     if tar -xvzf "$FILE_NAME" -C "$JDK_FOLDER" --strip-components=1; then
         echo "✅ Extraction successful."
     else
-        echo "❌ Extraction failed. Cleaning up..."
+        echo "ERROR: Extraction failed. Cleaning up..."
         rm "$FILE_NAME"
         rm -rf "$JDK_FOLDER"
         exit 1
     fi
     
-    echo "➡️  Step 7: Removing tar file..."
+    echo "Step 7: Removing tar file..."
     rm "$FILE_NAME"
 else
     echo "✅ JDK already installed."
 fi
 
-echo "➡️  Step 8: Setting JAVA_HOME and PATH..."
+echo "Step 8: Setting JAVA_HOME and PATH..."
 JAVA_HOME="$(pwd)/$JDK_FOLDER"
 PATH="$JAVA_HOME/bin:$PATH"
 echo "✅ JAVA_HOME set to: $JAVA_HOME"
 
-echo "➡️  Step 9: Testing JDK installation..."
+echo "Step 9: Testing JDK installation..."
 if java -version; then
     echo "✅ JDK $JDK_VERSION installed successfully."
 else
-    echo "❌ JDK install failed. Cleaning up..."
+    echo "ERROR: JDK install failed. Cleaning up..."
     rm -rf "$JDK_FOLDER"
     exit 1
 fi
 
-echo "🚀 All steps completed successfully!"
+echo "✅ All steps completed successfully!"

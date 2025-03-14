@@ -9,7 +9,7 @@
 # - https://spark.apache.org/downloads.html
 # - https://community.cloudera.com/t5/Community-Articles/Spark-and-Java-versions-Supportability-Matrix/ta-p/383669
 
-# TODO: Change the JDK version in the 01-setup/download-jdk.sh script
+# TODO: Change the JDK version in the 01-setup/download-jdk.sh script if needed
 # TODO: Change the SPARK_VERSION to the desired version if needed
 SPARK_VERSION="3.5.5"
 HADOOP_VERSION="3"
@@ -27,13 +27,13 @@ if [ "$OS" = "Darwin" ]; then
 elif [ "$OS" = "Linux" ]; then
     PLATFORM="linux"
 else
-    echo "❌ Unsupported platform: $OS"
+    echo "ERROR: Unsupported platform: $OS"
     exit 1
 fi
 
 # Ensure curl is installed
 if ! command -v curl &> /dev/null; then
-    echo "❌ 'curl' not installed. Please install it and try again."
+    echo "ERROR: 'curl' not installed. Please install it and try again."
     exit 1
 fi
 
@@ -45,10 +45,10 @@ DOWNLOAD_URL="https://downloads.apache.org/spark/spark-$SPARK_VERSION/spark-$SPA
 
 # Download Spark if not already present
 if [ ! -f "$SPARK_FOLDER/bin/spark-shell" ]; then
-    echo "📥 Downloading Apache Spark $SPARK_VERSION (Hadoop $HADOOP_VERSION)..."
+    echo "✅ Downloading Apache Spark $SPARK_VERSION (Hadoop $HADOOP_VERSION)..."
     curl -L -o spark.tgz "$DOWNLOAD_URL"
 
-    echo "📦 Extracting Spark..."
+    echo "✅ Extracting Spark..."
     tar -xvf spark.tgz -C "$SPARK_FOLDER" --strip-components=1
     rm spark.tgz
     echo "✅ Spark $SPARK_VERSION installed successfully."
@@ -58,7 +58,7 @@ fi
 
 # Confirm Spark binary exists
 if [ ! -f "$SPARK_FOLDER/bin/spark-shell" ]; then
-    echo "❌ Spark installation failed. Cleaning up..."
+    echo "ERROR: Spark installation failed. Cleaning up..."
     rm -rf "$SPARK_FOLDER"
     exit 1
 fi
@@ -67,20 +67,20 @@ fi
 JAVA_HOME="$(pwd)/$JDK_FOLDER"
 PATH="$JAVA_HOME/bin:$(pwd)/$SPARK_FOLDER/bin:$PATH"
 
-echo "🚀 Using temporary JAVA_HOME=$JAVA_HOME"
+echo "✅ Using temporary JAVA_HOME=$JAVA_HOME"
 
 # Test Spark shell version
 if spark-shell --version; then
     echo "✅ Spark $SPARK_VERSION is working correctly."
 else
-    echo "❌ Spark configuration failed. Check logs for details."
+    echo "ERROR: Spark configuration failed. Check logs for details."
     exit 1
 fi
 
 # Display quick instructions for starting Spark shell and PySpark
 echo ""
-echo "➡️ To start Spark shell:"
+echo "To start Spark shell:"
 echo "./$SPARK_FOLDER/bin/spark-shell"
 echo ""
-echo "➡️ To start PySpark:"
+echo "To start PySpark:"
 echo "./$SPARK_FOLDER/bin/pyspark"

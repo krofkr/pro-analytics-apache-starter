@@ -18,7 +18,7 @@ if [ "$OS" = "Darwin" ]; then
 elif [ "$OS" = "Linux" ]; then
     PLATFORM="linux"
 else
-    echo "❌ Unsupported platform: $OS"
+    echo "ERROR: Unsupported platform: $OS"
     exit 1
 fi
 
@@ -26,17 +26,17 @@ fi
 JAVA_HOME="$(pwd)/$JDK_FOLDER"
 PATH="$JAVA_HOME/bin:$(pwd)/$KAFKA_FOLDER/bin:$PATH"
 
-echo "🚀 Using temporary JAVA_HOME=$JAVA_HOME"
+echo "Using temporary JAVA_HOME=$JAVA_HOME"
 
 # Ensure Kafka install exists
 if [ ! -f "$KAFKA_FOLDER/bin/kafka-server-start.sh" ]; then
-    echo "❌ Kafka installation not found. Please run install-kafka.sh first."
+    echo "ERROR: Kafka installation not found. Please run install-kafka.sh first."
     exit 1
 fi
 
 # Check if port is already in use
 if lsof -i :$PORT &> /dev/null; then
-    echo "⚠️ Port $PORT is already in use."
+    echo "Port $PORT is already in use."
     echo "Stopping existing Kafka process..."
     pkill -f kafka.Kafka || true
     sleep 2
@@ -44,7 +44,7 @@ fi
 
 # Check for existing Kafka process (prevent accidental duplicates)
 if pgrep -f kafka.Kafka > /dev/null; then
-    echo "⚠️ Kafka is already running."
+    echo "Kafka is already running."
     echo "Use './kafka/bin/kafka-server-stop.sh' to stop it before restarting."
     exit 1
 fi
@@ -55,7 +55,7 @@ if [ -f "$LOG_FILE" ]; then
 fi
 
 # Start Kafka broker in an isolated environment (use KRaft mode)
-echo "📢 Starting Kafka broker..."
+echo "Starting Kafka broker..."
 nohup "$KAFKA_FOLDER/bin/kafka-server-start.sh" "$KAFKA_FOLDER/config/server.properties" > "$LOG_FILE" 2>&1 &
 
 # Wait for Kafka to start
@@ -63,22 +63,22 @@ sleep 5
 
 # Check if Kafka is running
 if pgrep -f kafka.Kafka > /dev/null; then
-    echo "✅ Kafka broker is running on port $PORT."
-    echo "➡️ Log file: $LOG_FILE"
+    echo "Kafka broker is running on port $PORT."
+    echo "Log file: $LOG_FILE"
 else
-    echo "❌ Kafka broker failed to start. Check $LOG_FILE for details."
+    echo "ERROR: Kafka broker failed to start. Check $LOG_FILE for details."
     exit 1
 fi
 
 # Instructions for stopping Kafka
 echo ""
-echo "➡️ To stop Kafka:"
+echo "To stop Kafka:"
 echo "./kafka/bin/kafka-server-stop.sh"
 echo ""
-echo "➡️ To list Kafka topics:"
+echo "To list Kafka topics:"
 echo "./kafka/bin/kafka-topics.sh --list --bootstrap-server localhost:$PORT"
 echo ""
 
 # Keep the script open to allow logs to stream
-echo "➡️ Press Ctrl + C to stop streaming logs."
+echo "Press Ctrl + C to stop streaming logs."
 tail -f "$LOG_FILE"

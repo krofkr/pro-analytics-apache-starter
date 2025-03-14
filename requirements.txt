@@ -197,7 +197,7 @@ seaborn
 
 # Apache Kafka Python client (~1 MB)
 # Currently requires Python 3.11
-kafka-python-ng
+# kafka-python-ng
 
 # ======================================================
 # STREAM PROCESSING - CAN BE VERY LARGE

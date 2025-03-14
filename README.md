@@ -1,6 +1,6 @@
 # pro-analytics-apache-starter
 
-This project provides an isolated development environment for Spark, Kafka, and PySpark using local JDK and virtual environments.  
+This project provides an isolated development environment for Apache tools like Kafka and PySpark using local JDK and virtual environments.  
 Works across macOS, Linux, and Windows (via WSL).  
 
 ---
@@ -105,7 +105,7 @@ Use the commands below to install only the tools your project requires:
 
 ---
 
-## Example: Using Apache Kafka
+## Example: Using Apache Kafka (e.g., for Streaming Data)
 
 Start the Kafka service (keep this terminal running)
 
@@ -134,7 +134,7 @@ pkill -f kafka
 ```
 
 
-## Example: Using PySpark
+## Example: Using PySpark (e.g., for BI and Analytics)
 
 Start PySpark (leave this terminal running)
 
@@ -142,18 +142,16 @@ Start PySpark (leave this terminal running)
 ./02-scripts/run-pyspark.sh
 ```
 
-In a second terminal, test Spark
-```shell
-python 02-scripts/test-spark.py
-```
+Open a browser to <http://localhost:4040/>  to monitor Spark jobs and execution details.
 
+In a second terminal, test Spark
+
+```shell
+python3 02-scripts/test-pyspark.py
+```
 
 Use that second terminal to stop the service when done:
 
 ```shell
 pkill -f pyspark
 ```
-
-
-
-
