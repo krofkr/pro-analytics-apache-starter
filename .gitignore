@@ -17,17 +17,14 @@ __pycache__/
 .ipynb_checkpoints
 
 # Ignore installed JDK, Spark, Kafka, and Flink binaries
-jdk/*
+/jdk/*
 !jdk/README.md
 
-spark/*
+/spark/*
 !spark/README.md
 
-kafka/*
+/kafka/*
 !kafka/README.md
-
-flink/*
-!flink/README.md
 
 # Logs and temp files
 *.log
