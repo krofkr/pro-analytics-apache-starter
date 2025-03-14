@@ -47,7 +47,7 @@ git clone https://github.com/denisecase/pro-analytics-apache-starter
 
 Then cd into your new folder (if you changed the name, use that):
 
-``shell
+```shell
 cd pro-analytics-apache-starter
 ```
 
@@ -73,6 +73,13 @@ Important Reminder: Always run `source .venv/bin/activate` before working on the
 python3 -m pip install --upgrade pip setuptools wheel
 python3 -m pip install --upgrade -r requirements.txt
 
+```
+
+## Grant Yourself Execute Permissions on the Script folders
+
+```shell
+chmod +x ./01-setup/*.sh
+chmod +x ./02-scripts/*.sh
 ```
 
 
