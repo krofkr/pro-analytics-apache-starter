@@ -20,9 +20,9 @@ wsl
 Important: All remaining commands must be run from within the WSL environment. 
 We will use the same ones the Mac/Linux users do when we are working in WSL. 
 
-### All Platforms: Chenge to Home Directory
+### All Platforms: Change to Home Directory
 
-Change to your home directory (or whereever you want to put your new project repository). 
+Change to your home directory. 
 Run these and all following commands in your shell ($ prompt) terminal.
 
 
@@ -80,6 +80,7 @@ python3 -m pip install --upgrade -r requirements.txt
 ```shell
 chmod +x ./01-setup/*.sh
 chmod +x ./02-scripts/*.sh
+chmod +x ./02-scripts/*.py
 ```
 
 
