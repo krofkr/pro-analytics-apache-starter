@@ -11,13 +11,12 @@
 # - https://kafka.apache.org/40/documentation/compatibility.html
 
 # TODO: Change the JDK_VERSION to the desired version if needed
+#!/bin/bash
 JDK_VERSION="17.0.10"
 JDK_FOLDER="jdk"
 
-# Fail fast on errors
 set -e
 
-# Detect platform (macOS, Linux, WSL)
 OS=$(uname -s)
 ARCH=$(uname -m)
 
@@ -36,41 +35,36 @@ else
     ARCH_SUFFIX="x64"
 fi
 
-DOWNLOAD_URL="https://download.java.net/java/GA/jdk17/$JDK_VERSION/GPL/openjdk-$JDK_VERSION_${PLATFORM}-${ARCH_SUFFIX}_bin.tar.gz"
+# Install curl if missing
+if ! command -v curl &> /dev/null; then
+    echo "Installing curl..."
+    if [ "$PLATFORM" = "linux" ]; then
+        sudo apt-get update && sudo apt-get install -y curl
+    elif [ "$PLATFORM" = "osx" ]; then
+        brew install curl
+    fi
+fi
 
-# Create the folder if it doesn't exist
+DOWNLOAD_URL="https://github.com/adoptium/temurin17-binaries/releases/download/jdk-${JDK_VERSION}%2B7/OpenJDK17U-jdk_${PLATFORM}_${ARCH_SUFFIX}_hotspot_${JDK_VERSION}_7.tar.gz"
+
 mkdir -p "$JDK_FOLDER"
 
-# Ensure curl is installed
-if ! command -v curl &> /dev/null; then
-    echo "❌ 'curl' not installed. Please install it and try again."
-    exit 1
-fi
-
-# Download JDK if not already present
 if [ ! -d "$JDK_FOLDER/bin" ]; then
-    echo "📥 Downloading OpenJDK $JDK_VERSION for $PLATFORM-$ARCH_SUFFIX..."
+    echo "Downloading OpenJDK $JDK_VERSION..."
     curl -L -o jdk.tar.gz "$DOWNLOAD_URL"
-
-    echo "📦 Extracting JDK..."
-    tar -xvf jdk.tar.gz -C "$JDK_FOLDER" --strip-components=1
+    
+    echo "Extracting JDK..."
+    tar -xvzf jdk.tar.gz -C "$JDK_FOLDER" --strip-components=1
     rm jdk.tar.gz
-    echo "✅ JDK $JDK_VERSION installed successfully."
-else
-    echo "✅ JDK $JDK_VERSION already installed."
 fi
 
-# Confirm JDK is working (TEMPORARY JAVA_HOME - NOT EXPORTED)
 JAVA_HOME="$(pwd)/$JDK_FOLDER"
 PATH="$JAVA_HOME/bin:$PATH"
 
-echo "🚀 Using temporary JAVA_HOME=$JAVA_HOME"
-
-# Test the JDK in this context only
 if java -version; then
-    echo "✅ JDK $JDK_VERSION is configured correctly."
+    echo "✅ JDK $JDK_VERSION installed successfully."
 else
-    echo "❌ JDK configuration failed. Cleaning up..."
+    echo "❌ JDK install failed. Cleaning up..."
     rm -rf "$JDK_FOLDER"
     exit 1
 fi
