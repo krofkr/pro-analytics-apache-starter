@@ -31,6 +31,14 @@ wsl --install
 Important: Remember/record your username and password on WSL! 
 Make it easy to remember. 
 
+## Open a WSL terminal 
+
+Open PowerShell terminal and run:
+
+```powershell
+wsl
+```
+
 ## Update and Upgrade
 
 This and all other commands are to be run in your WSL terminal. 
