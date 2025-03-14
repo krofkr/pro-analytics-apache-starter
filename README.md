@@ -7,7 +7,7 @@ Works across macOS, Linux, and Windows (via WSL).
 
 ## Getting Started
 
-### Just Windows Users: Set up WSL 
+### Just Windows Users: FIRST Set up WSL 
 
 Install Windows Subsystem for Linux (WSL) by following the [instructions](01-setup/windows-users-install-wsl.md).
 
@@ -17,11 +17,20 @@ Open WSL by opening a PowerShell terminal and running wsl.
 wsl
 ```
 
-Important: All remaining commands should be run from within the WSL environment. We will use the same ones the Mac/Linux users do when we are working in WSL. 
+Important: All remaining commands must be run from within the WSL environment. 
+We will use the same ones the Mac/Linux users do when we are working in WSL. 
+
+### All Platforms: Chenge to Home Directory
+
+Change to your home directory (or whereever you want to put your new project repository). 
+Run these and all following commands in your shell ($ prompt) terminal.
 
 
+```shell
+cd ~/
+```
 
-### All Platforms: Clone This Repo
+### All Platforms: Clone Your Repository Into Your Home Directory
 
 1. Copy the template repo into your GitHub account. You can change the name as desired.
 2. Open a terminal in your "Projects" folder or where ever you keep your coding projects.
