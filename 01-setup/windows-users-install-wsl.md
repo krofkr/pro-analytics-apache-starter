@@ -14,7 +14,7 @@ We'll clone the repo into WSL and do everything from within WSL on Windows.
 
 ## Update or Install WSL
 
-Open PowerShell as Administrator. Try to update WSL.
+Open **PowerShell as Administrator**. Try to update WSL.
 If you have it great:
 
 ```powershell
