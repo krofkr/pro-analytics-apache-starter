@@ -38,7 +38,7 @@ echo "✅ Spark installation detected in $SPARK_FOLDER"
 
 # Step 3: Confirm Java installation
 # Set temporary JAVA_HOME (not exported)
-JAVA_HOME="$(pwd)/$JDK_FOLDER"
+JAVA_HOME="/Library/Java/JavaVirtualMachines/openjdk-17.jdk/Contents/Home"
 PATH="$JAVA_HOME/bin:$(pwd)/$SPARK_FOLDER/bin:$PATH"
 
 # Test Java works locally without modifying system-wide settings
